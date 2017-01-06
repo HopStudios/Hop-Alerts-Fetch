@@ -79,7 +79,10 @@ class HAF_Wmata_helper
 		$result = json_decode($this->wmata_api->get_bus_incidents());
 		if ($result == NULL)
 		{
-			ee()->logger->developer('HAF: json received for buses is not valid');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: json received for buses is not valid');
+			}
 			return;
 		}
 
@@ -146,7 +149,10 @@ class HAF_Wmata_helper
 		$result = json_decode($this->wmata_api->get_rail_incidents());
 		if ($result == NULL)
 		{
-			ee()->logger->developer('HAF: json received for rail is not valid');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: json received for rail is not valid');
+			}
 			return;
 		}
 

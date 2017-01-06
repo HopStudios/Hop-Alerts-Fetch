@@ -37,6 +37,7 @@ class HAF_settings_helper
 			'last_update_car'					=> 1,
 			'last_update_train_marc'			=> 1,
 			'last_update_train_vavre'			=> 1,
+			'debug'								=> 'yes',
 		);
 	}
 
@@ -165,6 +166,16 @@ class HAF_settings_helper
 			return $api_key;
 		}
 		return 0;
+	}
+
+	public static function get_debug()
+	{
+		$debug = self::get_setting('debug');
+		if ($debug !== 'yes')
+		{
+			return FALSE;
+		}
+		return TRUE;
 	}
 
 	/**

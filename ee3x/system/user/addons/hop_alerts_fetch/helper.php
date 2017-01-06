@@ -16,25 +16,37 @@ class HAF_helper
 		$channel_id = HAF_settings_helper::get_alerts_channel_id();
 		if ($channel_id == 0)
 		{
-			ee()->logger->developer('HAF: channel id parameter not set !');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: channel id parameter not set !');
+			}
 			return FALSE;
 		}
 		$field_id_type = HAF_settings_helper::get_field_id_alert_type();
 		if ($field_id_type == 0)
 		{
-			ee()->logger->developer('HAF: field id type parameter not set !');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: field id type parameter not set !');
+			}
 			return FALSE;
 		}
 		$field_id_ext_id = HAF_settings_helper::get_field_id_alert_ext_id();
 		if ($field_id_ext_id == 0)
 		{
-			ee()->logger->developer('HAF: field id external id parameter not set !');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: field id external id parameter not set !');
+			}
 			return FALSE;
 		}
 		$field_id_body = HAF_settings_helper::get_field_id_alert_body();
 		if ($field_id_body == 0)
 		{
-			ee()->logger->developer('HAF: field id body parameter not set !');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: field id body parameter not set !');
+			}
 			return FALSE;
 		}
 
@@ -42,7 +54,10 @@ class HAF_helper
 		$member_id = intval(HAF_settings_helper::get_setting('alert_member_id'));
 		if ($member_id == 0)
 		{
-			ee()->logger->developer('HAF: member id parameter not set !');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: member id parameter not set !');
+			}
 			return FALSE;
 		}
 		$member = ee('Model')->get('Member', $member_id)->with('MemberGroup')->first();
@@ -80,7 +95,10 @@ class HAF_helper
 		// Check if the type is valid
 		if (!array_key_exists($type, $type_to_setting))
 		{
-			ee()->logger->developer('HAF: tried to create an entry with wrong type: '.$type);
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: tried to create an entry with wrong type: '.$type);
+			}
 			return FALSE;
 		}
 
@@ -102,13 +120,19 @@ class HAF_helper
 
 		if ($success)
 		{
-			ee()->logger->developer('HAF: Created entry "'.$title.'"');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: Created entry "'.$title.'"');
+			}
 
 			// $entry_id = ee()->api_channel_entries->entry_id;
 		}
 		else
 		{
-			ee()->logger->developer('HAF: Creating entry "'.$title.'" failed');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: Creating entry "'.$title.'" failed');
+			}
 		}
 
 		// Set the current session back to normal

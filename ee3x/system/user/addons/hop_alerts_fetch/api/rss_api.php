@@ -16,7 +16,9 @@ class RSS_api
 
 		if ($rss_feed == '')
 		{
-			ee()->logger->developer('HAF: RSS Feed of MARC train empty');
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: RSS Feed of MARC train empty');
+			}
 			return null;
 		}
 
@@ -26,7 +28,9 @@ class RSS_api
 
 		if ($result === FALSE)
 		{
-			ee()->logger->developer('HAF: Error parsing RSS Feed of MARC train');
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: Error parsing RSS Feed of MARC train');
+			}
 			return null;
 		}
 
@@ -53,7 +57,9 @@ class RSS_api
 
 		if ($rss_feed == '')
 		{
-			ee()->logger->developer('HAF: RSS Feed of VRE train empty');
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: RSS Feed of VRE train empty');
+			}
 			return null;
 		}
 
@@ -63,7 +69,9 @@ class RSS_api
 
 		if ($result === FALSE)
 		{
-			ee()->logger->developer('HAF: Error parsing RSS Feed of VRE train');
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: Error parsing RSS Feed of VRE train');
+			}
 			return null;
 		}
 

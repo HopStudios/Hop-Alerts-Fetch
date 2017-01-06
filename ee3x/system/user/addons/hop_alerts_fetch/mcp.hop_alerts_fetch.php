@@ -170,6 +170,13 @@ class hop_alerts_fetch_mcp
 					)
 				),
 				array(
+					'title' => 'debug',
+					'desc' => 'debug_desc',
+					'fields' => array(
+						'debug' => array('type' => 'inline_radio', 'choices' => array('yes' => 'yes', 'no' => 'no'), 'value' => $settings['debug'])
+					)
+				),
+				array(
 					'title' => '',
 					'fields' => array(
 						'action' => array('type' => 'hidden', 'value' => 'save_settings')

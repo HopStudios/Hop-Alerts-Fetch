@@ -69,7 +69,10 @@ class HAF_Twitter_helper
 		$results = json_decode($this->twitter_api->get_traffic_tweets());
 		if ($results == NULL)
 		{
-			ee()->logger->developer('HAF: json received for car is not valid');
+			if (HAF_settings_helper::get_debug())
+			{
+				ee()->logger->developer('HAF: json received for car is not valid');
+			}
 			return;
 		}
 
