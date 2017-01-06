@@ -9,11 +9,11 @@
  * @author		Hop Studios, Inc.
  * @copyright	Copyright (c) 2014, Hop Studios, Inc.
  * @link		http://www.hopstudios.com/software/
- * @version		0.0.1
+ * @version		0.0.2
  */
 
 $config['name']='Hop Alerts Fetch';
-$config['version']='0.0.1';
+$config['version']='0.0.2';
 // $config['nsm_addon_updater']['versions_xml']='http://www.hopstudios.com/software/versions/';
 
 // Version constant
