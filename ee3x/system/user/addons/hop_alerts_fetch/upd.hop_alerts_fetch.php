@@ -64,7 +64,7 @@ class Hop_alerts_fetch_upd {
 	{
 		ee()->load->dbforge();
 
-		if (version_compare($current, '0.0.2', '='))
+		if (version_compare($current, '0.0.3', '='))
 		{
 			return FALSE;
 		}
