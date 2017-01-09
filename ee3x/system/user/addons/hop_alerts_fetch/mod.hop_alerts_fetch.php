@@ -25,6 +25,7 @@ class Hop_alerts_fetch
 		// - VAVRE Train
 		// - MARC Train
 		// - ART Bus
+		// - Montgomery County Transit
 		$rss_h = new HAF_RSS_helper();
 		$rss_h->update_alerts();
 	}

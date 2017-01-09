@@ -98,7 +98,7 @@ class RSS_api
 		if ($rss_feed == '')
 		{
 			if (HAF_settings_helper::get_debug()) {
-				ee()->logger->developer('HAF: RSS Feed of VRE train empty');
+				ee()->logger->developer('HAF: RSS Feed of ART Bus empty');
 			}
 			return null;
 		}
@@ -123,6 +123,54 @@ class RSS_api
 				'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
 				'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue,
 				'guid' => $node->getElementsByTagName('guid')->item(0)->nodeValue,
+			);
+			$items[] = $item;
+		}
+
+		return $items;
+	}
+
+	public function get_montgomery_rideon_bus_updates()
+	{
+		$url = 'http://www.montgomerycountymd.gov/dot-rss/resources/files/rss/rideonrss.xml';
+
+		$rss_feed = $this->get_rss_content($url);
+
+		if ($rss_feed == '')
+		{
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: RSS Feed of Montgomery RideOn Bus empty');
+			}
+			return null;
+		}
+
+		// Parse that thing to retrieve meaningful content
+		$rss = new DOMDocument();
+		$result = $rss->loadXML($rss_feed);
+
+		if ($result === FALSE)
+		{
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: Error parsing RSS Feed of Montgomery RideOn Bus');
+			}
+			return null;
+		}
+
+		$items = array();
+		// This feed isn't like the others...
+		foreach ($rss->getElementsByTagName('entry') as $node) {
+			$link = '';
+			$link_node = $node->getElementsByTagName('link')->item(0);
+			if ($link_node)
+			{
+				$link = $link_node->getAttribute('href');
+			}
+			$item = array ( 
+				'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+				'desc' => $node->getElementsByTagName('content')->item(0)->nodeValue,
+				'link' => $link,
+				'date' => $node->getElementsByTagName('updated')->item(0)->nodeValue,
+				'guid' => null,
 			);
 			$items[] = $item;
 		}

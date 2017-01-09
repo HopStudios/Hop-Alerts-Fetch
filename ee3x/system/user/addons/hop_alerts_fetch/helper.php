@@ -91,6 +91,7 @@ class HAF_helper
 			'train_marc'	=> 'cat_id_train_marc',
 			'train_vavre'	=> 'cat_id_train_vavre',
 			'bus_art'		=> 'cat_id_bus_art',
+			'bus_montgomery_rideon' => 'cat_id_bus_montgomery_rideon',
 		);
 
 		// Check if the type is valid
