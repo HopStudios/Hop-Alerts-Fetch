@@ -27,6 +27,7 @@ class HAF_settings_helper
 			'cat_id_train_vavre'				=> 0,
 			'cat_id_bus_art'					=> 0,
 			'cat_id_bus_montgomery_rideon'		=> 0,
+			'cat_id_bus_dc_circulator'			=> 0,
 			'time_refresh'						=> (5*60), // Delay in seconds before refreshing results
 			'time_expired'						=> (60*60*12), //Delay in seconds to set an entry as expired, default 12 hours, used for some alert types (not all)
 			'wmata_api_key'						=> '', // Api key of wmata api
@@ -41,6 +42,7 @@ class HAF_settings_helper
 			'last_update_train_vavre'			=> 1,
 			'last_update_bus_art'				=> 1,
 			'last_update_bus_montgomery_rideon'	=> 1,
+			'last_update_bus_dc_circulator'		=> 1,
 			'debug'								=> 'yes',
 		);
 	}

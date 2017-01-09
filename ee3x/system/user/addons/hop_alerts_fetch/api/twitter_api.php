@@ -37,4 +37,22 @@ class Twitter_api
 		return $results;
 	}
 
+	public function get_dc_circulator_tweets($since = NULL)
+	{
+		$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+		$getfield = '?screen_name=DCCirculator&exclude_replies=true&include_rts=false&count=30';
+		$requestMethod = 'GET';
+
+		if ($since != NULL)
+		{
+			$getfield .= '&since_id='.$since;
+		}
+
+		$results = $this->twitter_api_exchange->setGetfield($getfield)
+			->buildOauth($url, $requestMethod)
+			->performRequest();
+
+		return $results;
+	}
+
 }
