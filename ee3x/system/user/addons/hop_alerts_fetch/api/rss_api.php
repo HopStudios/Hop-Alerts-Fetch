@@ -165,12 +165,14 @@ class RSS_api
 			{
 				$link = $link_node->getAttribute('href');
 			}
+			// guid doesn't exist, let's create one, because it's fun
+			$guid = $node->getElementsByTagName('title')->item(0)->nodeValue.''.$node->getElementsByTagName('updated')->item(0)->nodeValue;
 			$item = array ( 
 				'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
 				'desc' => $node->getElementsByTagName('content')->item(0)->nodeValue,
 				'link' => $link,
 				'date' => $node->getElementsByTagName('updated')->item(0)->nodeValue,
-				'guid' => null,
+				'guid' => $guid,
 			);
 			$items[] = $item;
 		}
