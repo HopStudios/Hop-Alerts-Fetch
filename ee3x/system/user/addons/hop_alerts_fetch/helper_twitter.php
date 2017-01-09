@@ -163,7 +163,7 @@ class HAF_Twitter_helper
 			$entries[$entry_res->{'field_id_'.$field_id_ext_id}] = $entry_res;
 		}
 
-		$results = json_decode($this->twitter_api->get_traffic_tweets());
+		$results = json_decode($this->twitter_api->get_dc_circulator_tweets());
 		if ($results == NULL)
 		{
 			if (HAF_settings_helper::get_debug())
