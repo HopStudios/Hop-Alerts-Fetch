@@ -121,6 +121,13 @@ class hop_alerts_fetch_mcp
 					)
 				),
 				array(
+					'title' => 'cat_id_bus_art',
+					// 'desc' => 'cat_id_bus_art_desc',
+					'fields' => array(
+						'cat_id_bus_art' => array('type' => 'text', 'value' => $settings['cat_id_bus_art'])
+					)
+				),
+				array(
 					'title' => 'time_refresh',
 					// 'desc' => 'time_refresh_desc',
 					'fields' => array(

@@ -4,12 +4,11 @@ class RSS_api
 {
 	public function __construct()
 	{
-
+		ee()->load->library('logger');
 	}
 
 	public function get_marc_train_updates()
 	{
-		ee()->load->library('logger');
 		$url = 'http://mtamarylandalerts.com/rss.aspx?ma';
 
 		$rss_feed = $this->get_rss_content($url);
@@ -90,6 +89,47 @@ class RSS_api
 		return $items;
 	}
 
+	public function get_art_bus_updates()
+	{
+		$url = 'http://www.commuterpage.com/RSS/artalert_rss.xml';
+
+		$rss_feed = $this->get_rss_content($url);
+
+		if ($rss_feed == '')
+		{
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: RSS Feed of VRE train empty');
+			}
+			return null;
+		}
+
+		// Parse that thing to retrieve meaningful content
+		$rss = new DOMDocument();
+		$result = $rss->loadXML($rss_feed);
+
+		if ($result === FALSE)
+		{
+			if (HAF_settings_helper::get_debug()) {
+				ee()->logger->developer('HAF: Error parsing RSS Feed of ART Bus');
+			}
+			return null;
+		}
+
+		$items = array();
+		foreach ($rss->getElementsByTagName('item') as $node) {
+			$item = array ( 
+				'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+				'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
+				'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
+				'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue,
+				'guid' => $node->getElementsByTagName('guid')->item(0)->nodeValue,
+			);
+			$items[] = $item;
+		}
+
+		return $items;
+	}
+
 	private function get_rss_content($url, $parameters = array())
 	{
 
@@ -102,6 +142,8 @@ class RSS_api
 		$ch = curl_init();
 
 		// curl_setopt($ch, CURLOPT_HTTPHEADER, array('api_key: ' . $this->api_key));
+		// Cheating here, in order not to get kicked out for sites/servers
+		curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -124,8 +166,8 @@ class RSS_api
 		else
 		{
 			//Error
-			// echo '<h2>Error WMATA API</h2>';
-			// print_r($data);
+			// We should probably log the error here...
+			ee()->logger->developer('HTTP Error '.$status.' when getting content from '.$url);
 			return $data;
 		}
 	}

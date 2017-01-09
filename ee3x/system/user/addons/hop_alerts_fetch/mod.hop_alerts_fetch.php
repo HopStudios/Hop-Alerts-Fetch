@@ -11,14 +11,20 @@ class Hop_alerts_fetch
 
 	function update_all()
 	{
-		// Update Rail and Bus
+		// Update all alerts from the different sources
 		
+		// Specific API for Washington Metropolitan Area Transit Authority (bus & rail)
 		$wmata_h = new HAF_Wmata_helper();
 		$wmata_h->update_alerts();
 
+		// Get tweets from WTOPtraffic Twitter account for live traffic infos
 		$twitter_h = new HAF_Twitter_helper();
 		$twitter_h->update_alerts();
 
+		// Get alerts from RSS feeds for
+		// - VAVRE Train
+		// - MARC Train
+		// - ART Bus
 		$rss_h = new HAF_RSS_helper();
 		$rss_h->update_alerts();
 	}

@@ -18,6 +18,7 @@ $lang = array(
 'cat_id_car'								=> 'Category Id for Car alerts',
 'cat_id_train_marc'							=> 'Category Id for Train MARC alerts',
 'cat_id_train_vavre'						=> 'Category Id for Train VRE alerts',
+'cat_id_bus_art'							=> 'Category Id for Bus ART alerts',
 'time_refresh'								=> 'Time in seconds before refreshing all alerts',
 'time_expired'								=> 'Time in seconds before setting an alert as expired',
 'wmata_api_key'								=> 'WMATA API Key',
