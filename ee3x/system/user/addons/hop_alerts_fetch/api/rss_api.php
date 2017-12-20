@@ -64,7 +64,7 @@ class RSS_api
 
 		// Parse that thing to retrieve meaningful content
 		$rss = new DOMDocument();
-		$result = $rss->loadXML($rss_feed);
+		$result = @$rss->loadXML($rss_feed);
 
 		if ($result === FALSE)
 		{
